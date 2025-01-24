@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> evenOddBit(int n) {
-        vector<int> arr;
 
         int evenCnt = 0, oddCnt = 0;
 
@@ -17,9 +16,7 @@ public:
             n = n >> 1;
             i++;
         }
-        arr.emplace_back(evenCnt);
-        arr.emplace_back(oddCnt);
 
-        return arr;
+        return {evenCnt, oddCnt};
     }
 };
