@@ -17,7 +17,17 @@ public:
                 dCount = 1;
             }
 
-            maxLen = max(maxLen, max(iCount, dCount));
+            if(iCount > dCount) {
+                if(iCount > maxLen) {
+                    maxLen = iCount;
+                }
+            } else {
+                if(dCount > maxLen) {
+                    maxLen = dCount;
+                }
+            }
+
+            //maxLen = max(maxLen, max(iCount, dCount));
         }
         
         
