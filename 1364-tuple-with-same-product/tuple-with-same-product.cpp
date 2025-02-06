@@ -6,10 +6,10 @@ public:
         int count = 0;
         
         int n = nums.size();
-
+        int mul;
         for(int i = 0; i < n; i++) {
             for(int j = i + 1; j < n; j++) {
-                int mul = nums[i] * nums[j];
+                mul = nums[i] * nums[j];
 
                 if(freq.find(mul) != freq.end()) {
                     count += 8 * freq[mul];
