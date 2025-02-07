@@ -3,8 +3,8 @@ public:
     bool isPowerOfThree(int n) {
         if(n <= 0) return false;
         
-        double res = log10(n) / log10(3);
+        double res = log(n) / log(3);
 
-        return floor(res) == res;
+        return abs(res - round(res)) < 1e-10;
     }
 };
