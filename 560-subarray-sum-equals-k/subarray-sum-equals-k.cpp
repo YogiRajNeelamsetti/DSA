@@ -1,7 +1,7 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        map<long long, int> mpp;
+        unordered_map<long long, int> mpp;
         long long sum = 0;
         int n = nums.size();
         mpp[sum] = 1;
@@ -9,8 +9,9 @@ public:
 
         for(int i = 0; i < n; i++) {
             sum += nums[i];
-            int remove = sum - k;
-            subArrayCount += mpp[remove];
+            if(mpp.count(sum - k)) {
+                subArrayCount += mpp[sum - k];
+            }
             mpp[sum]++;
         }
         
