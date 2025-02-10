@@ -18,8 +18,7 @@ public:
         vector<vector<int>> pascalTriangle;
 
         for(int i = 1; i <= numRows; i++) {
-            vector<int> row = nRow(i);
-            pascalTriangle.push_back(row);
+            pascalTriangle.push_back(nRow(i));
         }
 
         return pascalTriangle;
