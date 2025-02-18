@@ -2,16 +2,16 @@ class Solution {
 public:
     double myPow(double x, int n) {
 
+        if(n == 0) return 1;
+        if(x == 1) return 1;
+        if(x == -1) return (n % 2 == 0) ? 1 : -1;
+
         long long exp = n;
 
         if(n < 0) {
             x = 1 / x;
             exp = abs((long long)n);
         }
-
-        if(n == 0) return 1;
-        if(x == 1) return 1;
-        if(x == -1) return (exp & 1) ? x : -x;
 
         double ans = 1;
 
