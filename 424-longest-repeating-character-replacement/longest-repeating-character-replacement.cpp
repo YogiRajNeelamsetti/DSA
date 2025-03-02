@@ -7,7 +7,9 @@ public:
         while(r < s.size()) {
             mpp[s[r]]++;
 
-            maxFreq = max(maxFreq, mpp[s[r]]);
+            if(mpp[s[r]] > maxFreq) {
+                maxFreq = mpp[s[r]];
+            }
 
             if((r - l + 1) - maxFreq > k) {
                 mpp[s[l]]--;
@@ -16,7 +18,9 @@ public:
             }
 
             if((r - l + 1) - maxFreq <= k) {
-                maxLen = max(maxLen, (r - l + 1));
+                if((r - l + 1) > maxLen) {
+                    maxLen = (r - l + 1);
+                }
             }
             r++;
         }
