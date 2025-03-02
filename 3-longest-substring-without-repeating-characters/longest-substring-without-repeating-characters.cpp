@@ -11,7 +11,9 @@ public:
                     l = mpp[s[r]] + 1;
                 }
             }
-            maxLen = max(maxLen, r - l + 1);
+            if((r - l + 1) > maxLen) {
+                maxLen = (r - l + 1);
+            }
             mpp[s[r]] = r;
             r++;
         }
