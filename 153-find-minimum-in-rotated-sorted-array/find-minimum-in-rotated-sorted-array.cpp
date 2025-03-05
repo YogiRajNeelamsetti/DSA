@@ -10,11 +10,15 @@ public:
             int mid = (low + high) / 2;
 
             if(nums[low] <= nums[mid]) {
-                ans = min(ans, nums[low]);
+                if(nums[low] < ans) {
+                    ans = nums[low];
+                }
                 low = mid + 1;
             } else {
                 high = mid - 1;
-                ans = min(ans, nums[mid]);
+                if(nums[mid] < ans) {
+                    ans = nums[mid];
+                }
             }
         }
 
