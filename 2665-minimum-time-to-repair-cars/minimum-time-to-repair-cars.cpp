@@ -1,30 +1,33 @@
 class Solution {
-    bool isPossible(vector<int> &ranks, int cars, long long target) {
+public:
+    int freq[101] = {0}, minEl = 101, maxEl = 0;
+    bool isPossible(int cars, long long target) {
         long long ans = 0;
 
-        for(int i = 0; i < ranks.size(); i++) {
-            ans += floor(sqrt(target / ranks[i]));
+        for(int i = minEl; i <= maxEl; i++) {
+            ans += freq[i] * (long long)(sqrt(target / i));
+            if (ans >= cars) return 1;
         }
 
         return ans >= cars;
     }
-public:
     long long repairCars(vector<int>& ranks, int cars) {
-        long long low = 1, high = LLONG_MAX;
-        long long ans = high;
-        while(low <= high) {
+        for(int ele : ranks) {
+            if(ele < minEl) minEl = ele;
+            if(ele > maxEl) maxEl = ele;
+            freq[ele]++;
+        }
+        long long low = 1, high = 1LL * minEl * cars * cars;
+        while(low < high) {
             long long mid = low + (high - low) / 2;
 
-            if(isPossible(ranks, cars, mid)) {
-                if(mid < ans) {
-                    ans = mid;
-                }
-                high = mid - 1;
+            if(isPossible(cars, mid)) {
+                high = mid;
             } else {
                 low = mid + 1;
             }
         }
 
-        return ans;
+        return low;
     }
 };
