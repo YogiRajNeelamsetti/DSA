@@ -3,9 +3,10 @@ public:
     bool divideArray(vector<int>& nums) {
         
         sort(nums.begin(), nums.end());
-        int n = nums.size();
-        for(int i = 0; i < n; i += 2) {
-            if(nums[i] != nums[i + 1]) return false;
+        for(int i = 0; i < nums.size(); i += 2) {
+            if(nums[i] != nums[i + 1]) {
+                return false;
+            }
         }
 
         return true;
