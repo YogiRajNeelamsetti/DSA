@@ -33,8 +33,6 @@ public:
         while(temp != NULL) {
             if(temp -> random != NULL) {
                 temp -> next -> random = temp -> random -> next;
-            } else {
-                temp -> next -> random = NULL;
             }
             temp = temp -> next -> next;
         }
