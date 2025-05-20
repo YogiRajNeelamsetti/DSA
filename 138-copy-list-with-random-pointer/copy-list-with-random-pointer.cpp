@@ -29,24 +29,24 @@ public:
         }
 
         // 2 Connecting random pointers
-        Node* temp1 = head;
-        while(temp1 != NULL) {
-            if(temp1 -> random != NULL) {
-                temp1 -> next -> random = temp1 -> random -> next;
+        temp = head;
+        while(temp != NULL) {
+            if(temp -> random != NULL) {
+                temp -> next -> random = temp -> random -> next;
             } else {
-                temp1 -> next -> random = NULL;
+                temp -> next -> random = NULL;
             }
-            temp1 = temp1 -> next -> next;
+            temp = temp -> next -> next;
         }
 
         // 3 Connecting next pointers
-        Node* temp2 = head;
+        temp = head;
         Node* res = new Node(0);
         Node* temp3 = res;
-        while(temp2 != NULL) {
-            res -> next = temp2 -> next;
-            temp2 -> next = temp2 -> next -> next;
-            temp2 = temp2 -> next;
+        while(temp != NULL) {
+            res -> next = temp -> next;
+            temp -> next = temp -> next -> next;
+            temp = temp -> next;
             res = res -> next;
         }
 
