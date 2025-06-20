@@ -3,11 +3,11 @@ class Node{
         Node* links[2];
 
         bool containKey(int bit) {
-            return links[bit];
+            return (links[bit] != NULL);
         }
 
-        void put(int bit, Node* node) {
-            links[bit] = node;
+        void put(int bit) {
+            links[bit] = new Node();
         }
 
         Node* get(int bit) {
@@ -29,7 +29,7 @@ class Trie {
                 int bit = (num >> i) & 1;
 
                 if(!node -> containKey(bit)) {
-                    node -> put(bit, new Node());
+                    node -> put(bit);
                 }
                 node = node -> get(bit);
             }
@@ -42,7 +42,7 @@ class Trie {
             for(int i = 31; i >= 0; i--) {
                 int bit = (num >> i) & 1;
                 if(node -> containKey(1 - bit)) {
-                    maxNum |= (1 << i);
+                    maxNum = maxNum | (1 << i);
                     node = node -> get(1 - bit);
                 } else {
                     node = node -> get(bit);
