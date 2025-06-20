@@ -1,71 +1,69 @@
-class Node {
-    public:
-        Node* links[26];
-        bool flag;
+// class Node {
+//     public:
+//         Node* links[26];
+//         bool flag = false;
 
-        Node() {
-            for(int i = 0; i < 26; i++) links[i] = NULL;
-            flag = false;
-        }
+//         bool containKey(char ch) {
+//             return links[ch - 'a']
+//         }
 
-        bool containKey(char ch) {
-            return links[ch - 'a'];
-        }
+//         void put(char ch, Node* node) {
+//             links[ch - 'a'] = node;
+//         }
 
-        void put(char ch, Node* node) {
-            links[ch - 'a'] = node;
-        }
+//         Node* get(char ch) {
+//             return links[ch - 'a'];
+//         }
 
-        Node* get(char ch) {
-            return links[ch - 'a'];
-        }
+//         void setEnd() {
+//             flag = true;
+//         }
 
-        void setEnd() {
-            flag = true;
-        }
-
-        bool isEnd() {
-            return flag;
-        }
-};
+//         bool isEnd() {
+//             return flag;
+//         }
+// };
 
 class Trie {
 public:
-    Node* root;
+    Trie* links[26];
+    bool flag;
+
     Trie() {
-        root = new Node();
+        for(int i = 0; i < 26; i++) links[i] = NULL;
+        flag = false;
     }
     
     void insert(string word) {
-        Node* node = root;
+        Trie* node = this;
         for(int i = 0; i < word.size(); i++) {
             if(!(node -> links[word[i] - 'a'])) {
-                node -> put(word[i], new Node());
+                node -> links[word[i] - 'a'] = new Trie();
             }
 
             node = node -> links[word[i] - 'a'];
         }
-        node -> setEnd();
+        node -> flag = true;
 
         return;
     }
     
     bool search(string word) {
-        Node* node = root;
+        Trie* node = this;
 
         for(int i = 0; i < word.size(); i++) {
-            if(!(node -> get(word[i]))) return false;
+            if(!(node -> links[word[i] - 'a'])) return false;
 
             node = node -> links[word[i] - 'a'];
         }
 
-        return node -> isEnd();
+        return node -> flag;
     }
     
     bool startsWith(string prefix) {
-        Node* node = root;
+        Trie* node = this;
         for(int i = 0; i < prefix.size(); i++) {
-            if(!node -> get(prefix[i])) return false;
+            if(!node -> links[prefix[i] - 'a']) return false;
 
             node = node -> links[prefix[i] - 'a'];
         }
