@@ -13,10 +13,20 @@ public:
                     curr[j] = grid[0][0];
                 } else {
                     int up = grid[i][j], left = grid[i][j];
-                    if(i > 0) up += dp[j];
-                    else up += 1e9;
-                    if(j > 0) left += curr[j - 1];
-                    else left += 1e9;
+
+                    if(i > 0) {
+                        up += dp[j];
+                    }
+                    else {
+                        up += 1e9;
+                    }
+
+                    if(j > 0) {
+                        left += curr[j - 1];
+                    }
+                    else { 
+                        left += 1e9;
+                    }
 
                     curr[j] = min(up, left);
                 }
