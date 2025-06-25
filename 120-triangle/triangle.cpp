@@ -9,7 +9,7 @@ public:
         }
 
         for(int i = n - 2; i >= 0; i--) {
-            vector<int> curr(i + 1);
+            vector<int> curr(n);
             for(int j = i; j >= 0; j--) {
                 int down = triangle[i][j] + prev[j];
                 int downRight = triangle[i][j] + prev[j + 1];
