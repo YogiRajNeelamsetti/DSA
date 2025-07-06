@@ -4,16 +4,16 @@ public:
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
 
-        vector<unsigned long long> dp(amount + 1, 0);
+        vector<double> dp(amount + 1, 0);
 
         dp[0] = 1;
 
-        for(long long coin : coins) {
-            for(long long t = coin; t <= amount; t++) {
+        for(int coin : coins) {
+            for(int t = coin; t <= amount; t++) {
                 dp[t] = dp[t] + dp[t - coin];
             }
         }
 
-        return dp[amount];
+        return (int)dp[amount];
     }
 };
