@@ -1,32 +1,35 @@
 class Solution {
 public:
-    bool dfs(int crs, vector<vector<int>>& prerequisites, map<int, vector<int>> &mpp, set<int> &visited) {
-        if(visited.find(crs) != visited.end()) 
-            return false;
-        if(mpp[crs].empty())
-            return true;
-        
-        visited.insert(crs);
-
-        for(int pre : mpp[crs]) {
-            if(!dfs(pre, prerequisites, mpp, visited)) return false;
-        }
-
-        visited.erase(crs);
-        mpp[crs] = {};
-
-        return true;
-    }
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        map<int, vector<int>> mpp;
-        for(vector<int> course : prerequisites) {
-            mpp[course[0]].push_back(course[1]);
-        }
-        set<int> visited;
-        for(int i = 0; i < numCourses; i++) {
-            if(!dfs(i, prerequisites, mpp, visited)) return false;
-        }
-        return true;
-    }
+        vector<vector<int>> adj(numCourses);
 
+        for(auto it : prerequisites) {
+            adj[it[0]].push_back(it[1]);
+        }
+
+        vector<int> indegree(numCourses, 0);
+        for(int i = 0; i < numCourses; i++) {
+            for(auto it : adj[i]) {
+                indegree[it]++;
+            }
+        }
+
+        queue<int> q;
+        for(int i = 0; i < numCourses; i++) {
+            if(indegree[i] == 0) q.push(i);
+        }
+        vector<int> topo;
+        while(!q.empty()) {
+            int node = q.front();
+            q.pop();
+            topo.push_back(node);
+            for(int it : adj[node]) {
+                indegree[it]--;
+                if(indegree[it] == 0) q.push(it);
+            }
+        }
+
+        if(topo.size() == numCourses) return true;
+        return false;
+    }
 };
