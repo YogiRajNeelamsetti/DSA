@@ -4,15 +4,18 @@ public:
         int n = grid.size();
         int m = grid[0].size();
 
-        // if(grid[0][0] == 1) return -1;
+        if(grid[0][0] == 1) return -1;
 
         vector<vector<int>> dist(n, vector<int>(m, INT_MAX));
 
         queue<pair<int, pair<int, int>>> q;
-        if(grid[0][0] == 0) {
-            q.push({1, {0, 0}});
-            dist[0][0] = 1;
-        }
+        // if(grid[0][0] == 0) {
+            // q.push({1, {0, 0}});
+            // dist[0][0] = 1;
+        // }
+
+        q.push({1, {0, 0}});
+        dist[0][0] = 1;
 
         while(!q.empty()) {
             int dis = q.front().first;
