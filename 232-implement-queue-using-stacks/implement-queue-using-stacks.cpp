@@ -12,11 +12,14 @@ public:
     
     int pop() {
         int ele;
-        if(s2.empty()) {
-            while(!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
+        while(!s2.empty()) {
+            ele = s2.top();
+            s2.pop();
+            return ele;
+        }
+        while(!s1.empty()) {
+            s2.push(s1.top());
+            s1.pop();
         }
         ele = s2.top();
         s2.pop();
@@ -24,18 +27,18 @@ public:
     }
     
     int peek() {
-        if(s2.empty()) {
-            while(!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
+        if(!s2.empty()) return s2.top();
+        
+        while(!s1.empty()) {
+            s2.push(s1.top());
+            s1.pop();
         }
 
         return s2.top();
     }
     
     bool empty() {
-        return s2.empty() && s1.empty();
+        return s1.empty() && s2.empty();
     }
 };
 
