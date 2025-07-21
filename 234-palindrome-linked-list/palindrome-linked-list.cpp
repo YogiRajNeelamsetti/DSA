@@ -25,6 +25,9 @@ public:
         return prev;
     }
     bool isPalindrome(ListNode* head) {
+
+        if(head == NULL || head -> next == NULL) return true;
+
         ListNode* slow = head;
         ListNode* fast = head;
 
@@ -37,10 +40,12 @@ public:
         ListNode* first = head;
         ListNode* second = newHead;
 
+        bool flag = true;
+
         while(second != NULL) {
             if(first -> val != second -> val) {
-                reverse(newHead);
-                return false;
+                flag = false;
+                break;
             }
             first = first -> next;
             second = second -> next;
@@ -48,6 +53,6 @@ public:
 
         reverse(newHead);
 
-        return true;
+        return flag;
     }
 };
