@@ -5,17 +5,11 @@ public:
         vector<vector<int>> pascalTriangle;
 
         for(int r = 1; r <= numRows; r++) {
-            long long ans = 1;
-            vector<int> row;
-            row.push_back(ans);
-            for(int i = 1; i < r; i++) {
-                ans = ans * (r - i);
-                ans = ans / i;
-                row.push_back(ans);
+            vector<int> row(r);
+            row[0] = row[r - 1] = 1;
+            for(int i = 1; i < r - 1; i++) {
+                row[i] = pascalTriangle[r - 2][i - 1] + pascalTriangle[r - 2][i];
             }
-
-            for(int ele : row) cout<<ele<<" ";
-            cout<<endl;
             pascalTriangle.push_back(row);
         }
 
