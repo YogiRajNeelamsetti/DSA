@@ -10,66 +10,26 @@ public:
             return h;
         }
     };
-    
+
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        // int n = strs.size();
+        
+        unordered_map<string, vector<string>> mpp;
 
-        // vector<vector<string>> res;
+        for(string &s : strs) {
+            string temp = s;
+            sort(temp.begin(), temp.end());
 
-        // vector<vector<int>> freq(n, vector<int>(26, 0));
-
-        // for(int i = 0; i < n; i++) {
-        //     for(char &ch : strs[i]) {
-        //         freq[i][ch - 'a']++;
-        //     }
-        // }
-
-        // vector<int> vis(n, 0);
-
-        // for(int i = 0; i < n; i++) {
-        //     vector<string> str;
-
-        //     if(!vis[i]) str.push_back(strs[i]);
-        //     vis[i] = 1;
-        //     for(int j = i + 1; j < n; j++) {
-        //         bool flag = true;
-        //         for(int k = 0; k < 26; k++) {
-        //             if(freq[i][k] != freq[j][k]) {
-        //                 flag = false;
-        //                 break;
-        //             }
-        //         }
-
-        //         if(flag && !vis[j]) {
-        //             vis[j] = 1;
-        //             str.push_back(strs[j]);
-        //         }
-        //     }
-
-        //     if(!str.empty()) res.push_back(str);
-        // }
-
-        int n = strs.size();
-
-        vector<vector<int>> freq(n, vector<int>(26, 0));
-        unordered_map<vector<int>, vector<string>, VectorHash> mpp;
-
-        for(int i = 0; i < n; i++) {
-            for(char ch : strs[i]) {
-                freq[i][ch - 'a']++;
-            }
-
-            mpp[freq[i]].push_back(strs[i]);
+            mpp[temp].push_back(s);
         }
 
         vector<vector<string>> res;
 
-        for(auto p : mpp) {
-            vector<string> str;
-            for(auto s : p.second) {
-                str.push_back(s);
+        for(auto &[temp, str] : mpp) {
+            vector<string> st;
+            for(string &s : str) {
+                st.push_back(s);
             }
-            res.push_back(str);
+            res.push_back(st);
         }
 
         return res;
