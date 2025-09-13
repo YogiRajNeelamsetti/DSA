@@ -4,18 +4,16 @@ public:
         int n = s.size(), m = t.size();
 
         if(n != m) return false;
-        vector<int> cnt(26, 0);
+        vector<int> cntA(26, 0);
+        vector<int> cntB(26, 0);
 
         for(int i = 0; i < n; i++) {
-            cnt[s[i] - 'a']++;
-        }
-
-        for(int i = 0; i < m; i++) {
-            cnt[t[i] - 'a']--;
+            cntA[s[i] - 'a']++;
+            cntB[t[i] - 'a']++;
         }
 
         for(int i = 0; i < 26; i++) {
-            if(cnt[i] != 0) return false;
+            if(cntA[i] != cntB[i]) return false;
         }
 
         return true;
